@@ -42,7 +42,7 @@ const MyNavbar = ({ fetchJobsWithSearch }) => {
         />
         <Button
           variant="outline-info"
-          onClick={fetchJobsWithSearch(searchQuery)}
+          onClick={() => fetchJobsWithSearch(searchQuery)}
         >
           Search with title
         </Button>

@@ -33,8 +33,8 @@ export const fillJobsAction = (searchString) => {
     console.log('fetching the Jobs...')
     try {
     const baseUrl='https://strive-jobs-api.herokuapp.com/jobs?limit=20'
-    /* let resp = await fetch(searchString ? baseUrl + '&title=' + searchString : baseUrl) */
-      let resp = await fetch('https://strive-jobs-api.herokuapp.com/jobs?limit=20')
+    let resp = await fetch(searchString ? baseUrl + '&title=' + searchString : baseUrl)
+     /*  let resp = await fetch('https://strive-jobs-api.herokuapp.com/jobs?limit=20') */
       if (resp.ok) {
         let jobs = await resp.json()
         dispatch({

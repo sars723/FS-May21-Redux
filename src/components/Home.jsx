@@ -4,11 +4,13 @@ import JobList from "./JobList";
 import { connect } from "react-redux";
 import { fillJobsAction } from "../actions";
 import { Alert, Spinner } from "react-bootstrap";
-const mapStateToProps = (state) => state;
+import { useDispatch, useSelector } from "react-redux";
+/* const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
   fetchJobs: () => dispatch(fillJobsAction()),
-});
+}); */
+
 const Home = (props) => {
   /* const [jobs, setJobs] = useState([]); */
   /* const fetchJobs = async () => {
@@ -54,19 +56,25 @@ const Home = (props) => {
     fetchJobs();
   }, [props.searchQuery, props.searchCategory]);
  */
+
+  const dispatch = useDispatch();
+
+  const jobs = useSelector((state) => state.job.jobs);
+
   useEffect(() => {
-    props.fetchJobs();
+    /*  props.fetchJobs(); */
+    dispatch(fillJobsAction());
   }, []);
   return (
     <div className="mt-5">
-      {props.job.error ? (
+      {jobs.error ? (
         <Alert variant="danger">SOMETHING WENT WRONG!</Alert>
-      ) : props.job.loading ? (
+      ) : jobs.loading ? (
         <Spinner animation="border" variant="success" />
       ) : (
         <>
-          {console.log("jobs from state", props.job.jobs)}
-          {props.job.jobs.map((job) => (
+          {/*  {console.log("jobs from state", props.job.jobs)} */}
+          {jobs.map((job) => (
             <JobList key={job._id} jobb={job} />
           ))}
         </>
@@ -75,4 +83,4 @@ const Home = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default /* connect(mapStateToProps, mapDispatchToProps) */ Home;
